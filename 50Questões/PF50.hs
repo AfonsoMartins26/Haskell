@@ -1,7 +1,7 @@
 module PF50 where
 import Data.List ()
 
-
+-- segunda vez a fazer as 50 questões 
 --1
 enumFromTo' :: Int -> Int ->[Int] 
 enumFromTo' start end 
