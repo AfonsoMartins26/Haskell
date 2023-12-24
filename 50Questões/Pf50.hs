@@ -1,6 +1,6 @@
 module Pf50 where
 
-
+-- primeira vez a fazer as 50 questões 
 --1
 enumFromTo' :: Int -> Int -> [Int]
 enumFromTo' start end
