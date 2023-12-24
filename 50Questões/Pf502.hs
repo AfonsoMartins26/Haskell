@@ -3,7 +3,7 @@ import Data.List
 import Data.Binary.Get (label)
 
 
-
+-- terceira vez feita as 50 questões 
 --1
 enumFromTo' :: Int -> Int -> [Int]
 enumFromTo' x y 
