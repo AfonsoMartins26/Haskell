@@ -111,20 +111,7 @@ jogo t (a, b) = do
     else putStrLn "A propriedade é inválida"
 
 
-jogo' :: Int -> (Int, Int) -> IO ()
-jogo' n (a,b) = 
-    sequence (replicate n (randomRIO (a,b)))
-    >>= (\seq -> 
-        print seq
-        >> putStrLn "Introduza um numero:"
-        >> readLn
-        >>= (\s ->
-            if subseqSum seq s then
-                putStrLn "A propriedade verifica-se."
-            else
-                putStrLn "A propriedade nao se verifica."
-            )
-    )
+
 
 
      
