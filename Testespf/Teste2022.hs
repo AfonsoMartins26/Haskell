@@ -1,7 +1,7 @@
 module TestePf.Teste2022 where
 import Data.List
 import System.Random
-
+-- 12 de janeiro de 2022 
 --1 
 zip' :: [a] -> [b] -> [(a,b)]
 zip' [] _ = []
@@ -104,4 +104,4 @@ insereFim x desc [] = [ R (x,Just desc)[]]
 insereFim x desc (R (a,b)l:r) 
      | x == a = R (a,Just desc) l:r  
      |otherwise = R (a,b) l : insereFim x desc r  -- metemos para inserir na parte da direita pois na parte esquerda vai continuar a palavra 
-                                                  --  assim inserimos x no resto da arvore para formar uma palavra nova 
+                                                  --  assim inserimos x no resto da arvore para formar uma palavra nova  
