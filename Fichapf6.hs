@@ -48,7 +48,7 @@ por onde esse caminho passa-}
 path :: [Bool] -> BTree a -> [a]
 path [] (Node e _ _) = [e] 
 path _ Empty = []
-path (h:t) (Node e l r ) = e : path t (if h then r else l)  
+path (h:t) (Node e l r ) = e : path t (if h == True then r else l)  
 
 
 --(f) mirror :: BTree a -> BTree a, que d´a a ´arvore sim´etrica.
