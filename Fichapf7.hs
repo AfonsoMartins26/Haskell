@@ -126,7 +126,7 @@ splitFTree (No e l r) = (Node e lb rb,Fork ll rl)
 que sempre que as ´arvores sejam compat´ıveis as junta numa s´o.-}
 
 joinTrees :: BTree a -> LTree b -> Maybe (FTree a b)
-joinTrees Empty (Tip e) = Just (Leaf e) 
+joinTrees (Empty) (Tip e) = Just (Leaf e) 
 joinTrees (Node e l r) (Fork a b) =
     case (joinTrees l a, joinTrees r b) of (Just x, Just y) -> Just (No e x y)
                                            _ -> Nothing -- se as tentativas de fazer uma combinação falharem 
