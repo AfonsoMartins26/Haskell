@@ -49,7 +49,15 @@ inorder :: BTree a -> [a]
 inorder Empty = []
 inorder (Node r e d) = (inorder e) ++ (r:inorder d)
 
---a não sei 
+--a 
+numera :: BTree a -> BTree (a,Int)
+numera arv = snd (numeraAux 1 arv)
+
+numeraAux :: Int -> BTree a -> (Int,BTree (a,Int))
+numeraAux n Empty        = (0,Empty)
+numeraAux n (Node i e d) = let (ne,e1) = numeraAux n e
+                               (nd,d1) = numeraAux (n+ne+1) d
+                           in (ne+nd+1, Node (i,n+ne) e1 d1)
 
 --b  não sei se está certo 
 unInorder :: [a] -> [BTree a]
