@@ -150,11 +150,10 @@ trabEst (Node _ l r) = trabEst l ++ trabEst r
 de um aluno (se o aluno n˜ao estiver inscrito a fun¸c˜ao deve retornar Nothing).-}
 
 nota :: Numero -> Turma -> Maybe Classificacao
-nota n (Node (num,_,_,clas) l r)
-  | n == num = Just clas
-  | n < num = nota n l 
-  |otherwise = nota n r 
-nota _ _  = Nothing 
+nota n Empty = Nothing 
+nota n (Node (num ,nome,reg,clas)l r)
+      | n == num = Just clas 
+      |otherwise = nota n (if n <num then l else r )
 
 {-(e) percFaltas :: Turma -> Float, que calcula a percentagem de 
 alunos que faltaram `a avalia¸c˜ao.-}
