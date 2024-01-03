@@ -47,10 +47,16 @@ type Posicao = (Int,Int)
 data Movimento = Norte | Sul | Este | Oeste
 data Caminho = C Posicao [Movimento]
 
-instance  Eq (Caminho) where
-  (==) :: Caminho -> Caminho -> Bool  
-  (C p1 lista1) == (C p2 lista2) = p1 == p2 && (length lista1) == (length lista2)
+instance  Eq Caminho where
+  (==) :: Caminho -> Caminho -> Bool
+  c1@(C p1 list1)==  c2@(C p2 list2) = p1 == p2 && length list1 == length list2 && posChegada c1 == posChegada c2
 
+posChegada :: Caminho -> Posicao
+posChegada (C (a,b) [] ) = (a,b)
+posChegada (C (a,b) (Norte:xs)) = posChegada (C (a,b+1) xs)
+posChegada (C (a,b) (Sul:xs)) = posChegada (C (a,b-1) xs)
+posChegada (C (a,b) (Este:xs)) = posChegada (C (a+1,b) xs)
+posChegada (C (a,b) (Oeste:xs)) = posChegada (C (a-1,b) xs)
 
 --3 
 func :: [[Int]] -> [Int]
