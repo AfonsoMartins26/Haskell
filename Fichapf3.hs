@@ -36,11 +36,16 @@ viagemvalidaaux [h] = etapavalida h
 viagemvalidaaux ((hi,hf):(hp,_):t) =  etapavalida(hi,hf) && viagemvalidaaux t && horaDepoisDe hp hf 
 
 --(c) Calcular a hora de partida e de chegada de uma dada viagem.
+partidaEChegada :: Viagem -> (Hora,Hora)
+partidaEChegada v = (hi,hf)
+    where (hi,_) = head v
+          (_,hf) = last v
+
+--(d) Dada uma viagem v´alida, calcular o tempo total de viagem efectiva
 tempoViagemEfetiva :: Viagem -> Hora
 tempoViagemEfetiva [] = H 0 0
 tempoViagemEfetiva ((h1,h2):t) = tempoviagem' (minutosParaHora1(diferencaHoras h2 h1)) (tempoViagemEfetiva t)
 
---(d) Dada uma viagem v´alida, calcular o tempo total de viagem efectiva. 
 tempoViagem :: Viagem -> Hora
 tempoViagem (h:t) = tempoviagem (horaviagem (h:t))
 
