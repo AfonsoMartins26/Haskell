@@ -6,9 +6,10 @@ type MSet a = [(a,Int)]
 
 --1
 -- (a) 
-converteMSet :: MSet a -> [a]
+converteMSet :: [(a,Int)] -> [a]
 converteMSet [] = []
-converteMSet ((h,h1):t)= replica h h1 ++ converteMSet t 
+converteMSet ((x,1):xs) = x : converteMSet xs
+converteMSet ((x,n):xs) = x : converteMSet ((x,n-1) : xs)
 
 replica :: a -> Int  -> [a]
 replica h 0 = []
@@ -25,12 +26,21 @@ removeMSet x ((h,h1):t)
     | otherwise = (h,h1):removeMSet x t
 
 -- (c)
+
+
 uniaoMSet :: Eq a => MSet a -> MSet a -> MSet a
 uniaoMSet s1 [] = s1 
 uniaoMSet [] s2 = s2
-uniaoMSet ((x,n1):t1) ((y,n2):t2) 
-      | x == y = (x,n1+n2): uniaoMSet t1 t2 
-      | otherwise = (x,n1):(y,n2): uniaoMSet t1 t2 
+uniaoMSet l a = uniaoAux l (converteMSet a)
+
+uniaoAux :: Eq a => MSet a -> [a] -> MSet a
+uniaoAux l [] = l
+uniaoAux l [x] = insereMSet x l
+uniaoAux l (x:xs) = uniaoAux (insereMSet x l) xs
+
+insereMSet :: Eq a => a -> [(a,Int)] -> [(a,Int)]
+insereMSet x [] = [(x,1)]
+insereMSet x ((a,n):xs) = if x == a then (a,n+1) : xs else (a,n) : insereMSet x xs
 
 --2 
 type Posicao = (Int,Int)
