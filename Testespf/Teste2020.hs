@@ -25,15 +25,18 @@ elems :: ConjInt -> [Int]
 elems [] = [] 
 elems ((h,h'):t) = [h..h'] ++ elems t 
 
--- (b)  dificil 
+-- (b) 
 geraconj :: [Int] -> ConjInt
 geraconj [] = []
-geraconj (h:t) =
-    case geraconj t of 
-        [] -> [(h,h)]
-        (a,b) : r 
-            | a == succ h -> (h,b) : r     -- succ h numero depois de h ou h+1
-            | otherwise -> (h,h) : (a,b) :  r
+geraconj (h:t)  = geraconjaux [] (h:t)
+
+geraconjaux :: [Int]-> [Int] -> ConjInt 
+geraconjaux [] (h:t) = geraconjaux [h] (h:t)
+geraconjaux _ [] = []
+geraconjaux [n] [h] = [(n,h)]
+geraconjaux [n] (h:y:t) 
+      | y == succ h = geraconjaux [n] (y:t) 
+      | otherwise = (n,h) : geraconjaux [] (y:t) 
 
 -- 3 
 data Contacto = Casa Integer
