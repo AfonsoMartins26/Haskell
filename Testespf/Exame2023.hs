@@ -77,7 +77,8 @@ p1 = Not (Or (And (Not (Var "A")) (Var "B")) (Var "C"))
 
 -- (a)
 eval :: [(String, Bool)] -> Prop -> Bool
-eval l (Var x) = True 
+eval [(a,True)] (Var x) = True
+eval [(a,False)] (Var x) = False 
 eval l (Not p) = not (eval l p)
 eval l (And p q) = eval l p && eval l q
 eval l (Or p q) = eval l p || eval l q
