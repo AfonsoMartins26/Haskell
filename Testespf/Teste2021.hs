@@ -70,16 +70,15 @@ instance Show a => Show (BTree a) where
 
 
 -- 5 
-sortOn :: Ord b => (a -> b) -> [a] -> [a]
-sortOn _ [] = []
-sortOn f (h:t) = sortOn f smaller ++ [h] ++ sortOn f larger
-    where pivot = f h
-          (smaller, larger) = foldr (\x (s,l) -> 
-            if f x < pivot then
-                (x : s, l)
-            else
-                (s, x : l)
-            ) ([],[]) t
+sortOn' :: Ord b => (a -> b) -> [a] -> [a]
+sortOn' _ [] = []
+sortOn' f (h:t) = insertsortOn f h (sortOn' f t)
+
+insertsortOn :: Ord b => (a -> b) -> a -> [a] -> [a]
+insertsortOn f x [] =[x]
+insertsortOn f x (h:t)
+        |f x <= f h = (x:h:t)
+        |otherwise = h: insertsortOn f x t  
 
 --6
 data FileSystem = File Nome | Dir Nome [FileSystem]
